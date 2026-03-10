@@ -1,23 +1,13 @@
-function getRandomDiceValue() {
-  return 1 + Math.floor(6 * Math.random());
-}
+import axios from 'axios';
 
 export interface RollData{
   values: number[];
   total: number;
 }
 
-export function getRollData(numberOfDice: number): RollData{
-
-  const values: number[] = [];
-  let total: number = 0;
-  for(let i: number = 1; i <= numberOfDice; i++){
-    const diceValue = getRandomDiceValue();
-    values.push(diceValue);
-    total += diceValue;
-  }
-  return {
-    values: values,
-    total: total
-  }
+export async function fetchRollData(numberOfDice: number): Promise<RollData> {
+    const response =
+        await axios.get<RollData>(`http://localhost:8080/api/roll-dice?numberOfDice=${numberOfDice}`);
+  console.log(response.data)
+    return response.data;
 }
