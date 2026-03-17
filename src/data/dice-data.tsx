@@ -7,7 +7,7 @@ export interface RollData{
 
 export async function fetchRollData(numberOfDice: number): Promise<RollData> {
     const response =
-        await axios.get<RollData>(`http://localhost:8080/api/roll-dice?numberOfDice=${numberOfDice}`);
+        await axios.get<RollData>(`http://localhost:8080/api/dice-game/roll-dice?numberOfDice=${numberOfDice}`);
   console.log(response.data)
     return response.data;
 }
